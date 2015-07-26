@@ -4,6 +4,7 @@
 <c:if test="${not empty model.text}">
 	<p>Text property: ${model.text}</p>
 </c:if>
+
 <pre>
 HelloWorldModel says:
 ${model.message}
