@@ -9,7 +9,7 @@
             <par
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="wcm/foundation/components/parsys"
-                components="[group:Slice Demo Components]">
+                components="[group:Slice Demo Components,wcm/foundation/components/title,wcm/foundation/components/text,wcm/foundation/components/image]">
                 <colctrl
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="slicedemo/components/content/colctrl"
