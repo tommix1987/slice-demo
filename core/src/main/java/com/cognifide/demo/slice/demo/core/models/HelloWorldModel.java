@@ -15,34 +15,54 @@
  */
 package com.cognifide.demo.slice.demo.core.models;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.models.annotations.Default;
-import org.apache.sling.models.annotations.Model;
 import org.apache.sling.settings.SlingSettingsService;
 
-@Model(adaptables=Resource.class)
+import com.cognifide.demo.slice.demo.core.businesslogic.BusinessLogicProvider;
+import com.cognifide.slice.api.annotation.OsgiService;
+import com.cognifide.slice.mapper.annotation.JcrProperty;
+import com.cognifide.slice.mapper.annotation.SliceResource;
+
+@SliceResource
 public class HelloWorldModel {
 
-    @Inject
-    private SlingSettingsService settings;
+	// Properties mapped on field level, we don't need to unit test it, since
+	// this functionality was tested within Slice framework already
+	@JcrProperty
+	private String text;
 
-    @Inject @Named("sling:resourceType") @Default(values="No resourceType")
-    protected String resourceType;
+	@JcrProperty("sling:resourceType")
+	private String resourceType;
 
-    private String message;
+	private SlingSettingsService settings;
 
-    @PostConstruct
-    protected void init() {
-        message = "\tHello World!\n";
-        message += "\tThis is instance: " + settings.getSlingId() + "\n";
-        message += "\tResource type is: " + resourceType + "\n";
-    }
+	private BusinessLogicProvider logicProvider;
 
-    public String getMessage() {
-        return message;
-    }
+	// Injection through constructor to make our class easily testable by enabling mocking
+	@Inject
+	public HelloWorldModel(@OsgiService SlingSettingsService settings,
+			BusinessLogicProvider logicProvider) {
+		this.settings = settings;
+		this.logicProvider = logicProvider;
+	}
+
+	// Simple getter for automatically mapped property
+	public String getText() {
+		return text;
+	}
+
+	public String getMessage() {
+		String returnMessage = "Hello World!\n";
+		returnMessage += "This is instance: " + settings.getSlingId() + "\n";
+		returnMessage += "Resource type is: " + resourceType + "\n";
+
+		return returnMessage;
+	}
+
+	// Message delivered from injected business logic provider
+	public String getDynamicMessage() {
+		return logicProvider.getDynamicMessage();
+	}
+
 }

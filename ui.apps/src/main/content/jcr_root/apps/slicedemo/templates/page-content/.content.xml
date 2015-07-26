@@ -10,10 +10,10 @@
         sling:resourceType="slicedemo/components/structure/page">
         <logo
             jcr:primaryType="nt:unstructured"
-            sling:resourceType="slicedemo/components/structure/logo"/>
+            sling:resourceType="foundation/components/logo"/>
         <title
             jcr:primaryType="nt:unstructured"
-            sling:resourceType="slicedemo/components/content/title"/>
+            sling:resourceType="wcm/foundation/components/title"/>
         <topnav
             jcr:primaryType="nt:unstructured"
             sling:resourceType="slicedemo/components/structure/topnav"/>
@@ -22,7 +22,7 @@
             sling:resourceType="wcm/foundation/components/parsys">
             <text
                 jcr:primaryType="nt:unstructured"
-                sling:resourceType="slicedemo/components/content/text"
+                sling:resourceType="wcm/foundation/components/text"
                 text="&lt;p>This is a content page&lt;/p>"
                 textIsRich="true"/>
         </par>
